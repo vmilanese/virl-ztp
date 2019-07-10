@@ -8,7 +8,6 @@
     </extensions>
     <node name="nx-osv-1" type="SIMPLE" subtype="NX-OSv 9000" location="291,104">
         <extensions>
-            <entry key="static_ip" type="String">172.16.1.10</entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2019-04-30 10:05
 ! by autonetkit_0.24.0
 !
@@ -108,7 +107,6 @@ line vty
     </node>
     <node name="nx-osv-2" type="SIMPLE" subtype="NX-OSv 9000" location="285,314">
         <extensions>
-            <entry key="static_ip" type="String">172.16.1.11</entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2019-04-30 10:05
 ! by autonetkit_0.24.0
 !
@@ -208,7 +206,6 @@ line vty
     </node>
     <node name="nx-osv-3" type="SIMPLE" subtype="NX-OSv 9000" location="562,44">
         <extensions>
-            <entry key="static_ip" type="String">172.16.1.12</entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2019-04-30 10:05
 ! by autonetkit_0.24.0
 !
@@ -300,7 +297,6 @@ line vty
     </node>
     <node name="nx-osv-4" type="SIMPLE" subtype="NX-OSv 9000" location="561,176">
         <extensions>
-            <entry key="static_ip" type="String">172.16.1.13</entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2019-04-30 10:05
 ! by autonetkit_0.24.0
 !
@@ -390,113 +386,8 @@ line vty
         <interface id="1" name="Ethernet1/2"/>
         <interface id="2" name="Ethernet1/3"/>
     </node>
-    <node name="server-1" type="SIMPLE" subtype="server" location="687,45">
-        <extensions>
-            <entry key="config" type="String">#cloud-config
-bootcmd:
-- ln -s -t /etc/rc.d /etc/rc.local
-hostname: server-1
-manage_etc_hosts: true
-runcmd:
-- start ttyS0
-- systemctl start getty@ttyS0.service
-- systemctl start rc-local
-- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
-- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
-- service ssh restart
-- service sshd restart
-users:
-- default
-- gecos: User configured by VIRL Configuration Engine 0.23.10
-  lock-passwd: false
-  name: cisco
-  plain-text-passwd: cisco
-  shell: /bin/bash
-  ssh-authorized-keys:
-  - VIRL-USER-SSH-PUBLIC-KEY
-  sudo: ALL=(ALL) ALL
-write_files:
-- path: /etc/init/ttyS0.conf
-  owner: root:root
-  content: |
-    # ttyS0 - getty
-    # This service maintains a getty on ttyS0 from the point the system is
-    # started until it is shut down again.
-    start on stopped rc or RUNLEVEL=[12345]
-    stop on runlevel [!12345]
-    respawn
-    exec /sbin/getty -L 115200 ttyS0 vt102
-  permissions: '0644'
-- path: /etc/systemd/system/dhclient@.service
-  content: |
-    [Unit]
-    Description=Run dhclient on %i interface
-    After=network.target
-    [Service]
-    Type=oneshot
-    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
-    RemainAfterExit=yes
-  owner: root:root
-  permissions: '0644'
-</entry>
-        </extensions>
-        <interface id="0" name="eth1"/>
-    </node>
-    <node name="server-2" type="SIMPLE" subtype="server" location="686,182">
-        <extensions>
-            <entry key="config" type="String">#cloud-config
-bootcmd:
-- ln -s -t /etc/rc.d /etc/rc.local
-hostname: server-2
-manage_etc_hosts: true
-runcmd:
-- start ttyS0
-- systemctl start getty@ttyS0.service
-- systemctl start rc-local
-- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
-- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
-- service ssh restart
-- service sshd restart
-users:
-- default
-- gecos: User configured by VIRL Configuration Engine 0.23.10
-  lock-passwd: false
-  name: cisco
-  plain-text-passwd: cisco
-  shell: /bin/bash
-  ssh-authorized-keys:
-  - VIRL-USER-SSH-PUBLIC-KEY
-  sudo: ALL=(ALL) ALL
-write_files:
-- path: /etc/init/ttyS0.conf
-  owner: root:root
-  content: |
-    # ttyS0 - getty
-    # This service maintains a getty on ttyS0 from the point the system is
-    # started until it is shut down again.
-    start on stopped rc or RUNLEVEL=[12345]
-    stop on runlevel [!12345]
-    respawn
-    exec /sbin/getty -L 115200 ttyS0 vt102
-  permissions: '0644'
-- path: /etc/systemd/system/dhclient@.service
-  content: |
-    [Unit]
-    Description=Run dhclient on %i interface
-    After=network.target
-    [Service]
-    Type=oneshot
-    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
-    RemainAfterExit=yes
-  owner: root:root
-  permissions: '0644'
-</entry>
-        </extensions>
-        <interface id="0" name="eth1"/>
-    </node>
     <node name="nx-osv-5" type="SIMPLE" subtype="NX-OSv 9000" location="558,310">
         <extensions>
-            <entry key="static_ip" type="String">172.16.1.14</entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2019-04-30 10:05
 ! by autonetkit_0.24.0
 !
@@ -588,7 +479,6 @@ line vty
     </node>
     <node name="nx-osv-6" type="SIMPLE" subtype="NX-OSv 9000" location="561,463">
         <extensions>
-            <entry key="static_ip" type="String">172.16.1.15</entry>
             <entry key="config" type="String">! NX-OSv Config generated on 2019-04-30 10:05
 ! by autonetkit_0.24.0
 !
@@ -678,121 +568,13 @@ line vty
         <interface id="1" name="Ethernet1/2"/>
         <interface id="2" name="Ethernet1/3"/>
     </node>
-    <node name="server-3" type="SIMPLE" subtype="server" location="682,305">
-        <extensions>
-            <entry key="config" type="string">#cloud-config
-bootcmd:
-- ln -s -t /etc/rc.d /etc/rc.local
-hostname: server-3
-manage_etc_hosts: true
-runcmd:
-- start ttyS0
-- systemctl start getty@ttyS0.service
-- systemctl start rc-local
-- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
-- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
-- service ssh restart
-- service sshd restart
-users:
-- default
-- gecos: User configured by VIRL Configuration Engine 0.23.10
-  lock-passwd: false
-  name: cisco
-  plain-text-passwd: cisco
-  shell: /bin/bash
-  ssh-authorized-keys:
-  - VIRL-USER-SSH-PUBLIC-KEY
-  sudo: ALL=(ALL) ALL
-write_files:
-- path: /etc/init/ttyS0.conf
-  owner: root:root
-  content: |
-    # ttyS0 - getty
-    # This service maintains a getty on ttyS0 from the point the system is
-    # started until it is shut down again.
-    start on stopped rc or RUNLEVEL=[12345]
-    stop on runlevel [!12345]
-    respawn
-    exec /sbin/getty -L 115200 ttyS0 vt102
-  permissions: '0644'
-- path: /etc/systemd/system/dhclient@.service
-  content: |
-    [Unit]
-    Description=Run dhclient on %i interface
-    After=network.target
-    [Service]
-    Type=oneshot
-    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
-    RemainAfterExit=yes
-  owner: root:root
-  permissions: '0644'
-</entry>
-        </extensions>
-        <interface id="0" name="eth1"/>
-    </node>
-    <node name="server-4" type="SIMPLE" subtype="server" location="681,461">
-        <extensions>
-            <entry key="config" type="string">#cloud-config
-bootcmd:
-- ln -s -t /etc/rc.d /etc/rc.local
-hostname: server-4
-manage_etc_hosts: true
-runcmd:
-- start ttyS0
-- systemctl start getty@ttyS0.service
-- systemctl start rc-local
-- sed -i '/^\s*PasswordAuthentication\s\+no/d' /etc/ssh/sshd_config
-- echo "UseDNS no" &gt;&gt; /etc/ssh/sshd_config
-- service ssh restart
-- service sshd restart
-users:
-- default
-- gecos: User configured by VIRL Configuration Engine 0.23.10
-  lock-passwd: false
-  name: cisco
-  plain-text-passwd: cisco
-  shell: /bin/bash
-  ssh-authorized-keys:
-  - VIRL-USER-SSH-PUBLIC-KEY
-  sudo: ALL=(ALL) ALL
-write_files:
-- path: /etc/init/ttyS0.conf
-  owner: root:root
-  content: |
-    # ttyS0 - getty
-    # This service maintains a getty on ttyS0 from the point the system is
-    # started until it is shut down again.
-    start on stopped rc or RUNLEVEL=[12345]
-    stop on runlevel [!12345]
-    respawn
-    exec /sbin/getty -L 115200 ttyS0 vt102
-  permissions: '0644'
-- path: /etc/systemd/system/dhclient@.service
-  content: |
-    [Unit]
-    Description=Run dhclient on %i interface
-    After=network.target
-    [Service]
-    Type=oneshot
-    ExecStart=/sbin/dhclient %i -pf /var/run/dhclient.%i.pid -lf /var/lib/dhclient/dhclient.%i.lease
-    RemainAfterExit=yes
-  owner: root:root
-  permissions: '0644'
-</entry>
-        </extensions>
-        <interface id="0" name="eth1"/>
-    </node>
     <annotations/>
     <connection dst="/virl:topology/virl:node[3]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[1]"/>
     <connection dst="/virl:topology/virl:node[4]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[2]"/>
     <connection dst="/virl:topology/virl:node[3]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[1]"/>
     <connection dst="/virl:topology/virl:node[4]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[2]"/>
-    <connection dst="/virl:topology/virl:node[7]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[3]"/>
-    <connection dst="/virl:topology/virl:node[5]/virl:interface[1]" src="/virl:topology/virl:node[3]/virl:interface[3]"/>
-    <connection dst="/virl:topology/virl:node[6]/virl:interface[1]" src="/virl:topology/virl:node[4]/virl:interface[3]"/>
-    <connection dst="/virl:topology/virl:node[9]/virl:interface[1]" src="/virl:topology/virl:node[7]/virl:interface[3]"/>
-    <connection dst="/virl:topology/virl:node[10]/virl:interface[1]" src="/virl:topology/virl:node[8]/virl:interface[3]"/>
-    <connection dst="/virl:topology/virl:node[8]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[4]"/>
-    <connection dst="/virl:topology/virl:node[8]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[4]"/>
-    <connection dst="/virl:topology/virl:node[7]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[3]"/>
+    <connection dst="/virl:topology/virl:node[5]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[3]"/>
+    <connection dst="/virl:topology/virl:node[6]/virl:interface[1]" src="/virl:topology/virl:node[1]/virl:interface[4]"/>
+    <connection dst="/virl:topology/virl:node[6]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[4]"/>
+    <connection dst="/virl:topology/virl:node[5]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[3]"/>
 </topology>
